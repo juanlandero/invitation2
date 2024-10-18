@@ -22,6 +22,10 @@
             color: #AB8AA7;
         }
 
+        .gris {
+            color: #57666C;
+        }
+
         .box-out {
             position: absolute;
             top: 0px;
@@ -45,7 +49,7 @@
         }
 
         .title {
-            font-size: 8rem;
+            font-size: 7.6rem;
             line-height: 0.8;
         }
 
@@ -93,40 +97,35 @@
 <body style="overflow-x: hidden !important; padding: 0; margin: 0;">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-8 title savoye-font lila mb-3" style="padding-top: 100px;">
-                <div class="">María</div>
+            <div class="col-8 title savoye-font lila mb-1" style="padding-top: 100px;">
+                <div>María</div>
                 <p class="text-end">José</p>
             </div>
 
-            <div class="col-10 mb-5 text-center" style="background-color: blrue;">
+            <div class="col-11 mb-4 text-center" style="background-color: blrue;">
                 <div class="row align-items-center justify-content-center">
-                    <div class="col-3 section h4 lila">DOMINGO</div>
+                    <div class="col-3 section h5 lila">DOMINGO</div>
 
                     <div class="col-4">
                         <div class="row">
-                            <div class="col-12">NOVIEMBRE</div>
+                            <div class="col-12 gris">NOVIEMBRE</div>
                             <div class="col-12 title2 lila">17</div>
-                            <div class="col-12 h3">2 0 2 4</div>
+                            <div class="col-12 h4 gris">2 0 2 4</div>
                         </div>
                     </div>
 
-                    <div class="col-3 section h4 lila">14:00 hrs.</div>
+                    <div class="col-3 section h5 lila">14:00 hrs.</div>
                 </div>
             </div>
 
-            <div class="col-10 mb-5">
+            <div class="col-10 mb-3">
                 <div class="row justify-content-center">
                     <div class="col">
-                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill">CONFIRMAR ASISTENCIA</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#assistanceModal">CONFIRMAR ASISTENCIA</button>
+
                     </div>
                     <div class="col d-grid gap-2">
-                        <!-- <a href="https://www.google.com/maps/place/Moisés+Sosa+115,+Primero+de+Mayo,+86190+Villahermosa,+Tab./@17.9734765,-92.9313951,19z/data=!4m16!1m9!3m8!1s0x85edd9d3e9ed1ce3:0x16a854ab083045e!2sMoisés+Sosa+115,+Primero+de+Mayo,+86190+Villahermosa,+Tab.!3b1!8m2!3d17.9736289!4d-92.9313954!10e5!16s%2Fg%2F11cpqfmrhs!3m5!1s0x85edd9d3e9ed1ce3:0x16a854ab083045e!8m2!3d17.9736289!4d-92.9313954!16s%2Fg%2F11cpqfmrhs?entry=ttu&g_ep=EgoyMDI0MTAxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-
-                            <button class="">
-                        </a> -->
-
                         <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#locationModal">VER UBICACIÓN</button>
-
                     </div>
                 </div>
             </div>
@@ -169,9 +168,31 @@
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"
                     ></iframe>
+                    <div id="emailHelp" class="form-text">Puedes usar el botón "Ampliar mapa", para abrir el mapa en google maps.</div>
                 </div>
                 <div class="modal-footer ma">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="assistanceModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirma tu asistencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Tu número de telefóno</label>
+                            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <!-- <div id="emailHelp" class="form-text">We'll .</div> -->
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </form>
                 </div>
             </div>
         </div>
