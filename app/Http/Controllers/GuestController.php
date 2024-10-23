@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GuestPhone;
+use Exception;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -29,20 +30,36 @@ class GuestController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'phone' => 'required|string|max:10 ',
-        ]);
+            'phone' => 'required|string|max:10|min:10 ',
+        ],
+        [
+            'required' => 'Debes ingresar un número de teléfono',
+            'max' => 'Maxímo 10 dígitos',
+            'min' => 'Minímo 10 dígitos',
+        ]
+    );
 
         $phone = GuestPhone::where('phone', $request->phone)->first();
 
         if (null === $phone) {
-            return response()->json(['message' => 'El número de teléfono ingresado no esta registrado.']);
+            return response()->json(['message' => '😖 El número de teléfono ingresado no esta registrado 📱'], 404);
         }
 
-        if ($phone->guest === true) {
-            return response()->json(['message' => 'Ya se ha confirmado la asistencía anteriormente.']);
+        if ((bool)$phone->guest->is_confirmed === true) {
+            return response()->json(['message' => '🧐 Ya has confirmado la asistencía anteriormente. 🌸']);
         }
 
-        return $phone->guest->update(['is_confirmed' =>  true]);
+        try {
+            $phone->guest->update(['is_confirmed' =>  true]);
+
+            return response()->json([
+                'message' => '🥳 ¡Qué alegría que puedas venir a mi fiesta de cumpleaños! 🎉 Estoy muy emocionada de que celebres conmigo. ¡Nos vemos pronto! 😊',
+                'assitants' => $phone->guest->guest_quantity,
+                'family' => $phone->guest->family,
+            ]);
+        } catch(\Exception $e) {
+            return response()->json(['message' => '🤯 Ocurrio un error al validar su número de teléfono, informale a la cumpleañera... 👑']);
+        }
 
     }
 
