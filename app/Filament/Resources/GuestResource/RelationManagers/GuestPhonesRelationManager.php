@@ -19,8 +19,9 @@ class GuestPhonesRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\TextInput::make('phone')
+                    ->label('Teléfono')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(10),
             ]);
     }
 
@@ -29,7 +30,7 @@ class GuestPhonesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('guest')
             ->columns([
-                Tables\Columns\TextColumn::make('phone'),
+                Tables\Columns\TextColumn::make('phone')->label('Telefonos'),
             ])
             ->filters([
                 //

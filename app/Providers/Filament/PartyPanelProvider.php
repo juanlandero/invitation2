@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\GuestResource\Widgets\ConfirmedGuest;
+use App\Filament\Resources\GuestResource\Widgets\ConfirmedGuestsOverview;
+use Filament\Forms\Components\Grid;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -37,8 +40,8 @@ class PartyPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                ConfirmedGuestsOverview::class,
+                ConfirmedGuest::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -3,13 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\GuestResource\Pages;
-use App\Filament\Resources\GuestResource\RelationManagers;
 use App\Filament\Resources\GuestResource\RelationManagers\GuestPhonesRelationManager;
-use App\Filament\Resources\GuestResource\RelationManagers\GuestRelationManager;
 use App\Models\Guest;
-use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,14 +13,18 @@ use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GuestResource extends Resource
 {
     protected static ?string $model = Guest::class;
+
+    protected static ?string $modelLabel = 'Invitado';
+
+    protected static ?string $pluralModelLabel = 'Invitados';
+
+    protected static ?string $navigationLabel = 'Mis invitados';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -47,17 +47,17 @@ class GuestResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('family'),
-                TextColumn::make('guest_quantity'),
+                TextColumn::make('family')->label('Familia'),
+                TextColumn::make('guest_quantity')->label('#'),
                 IconColumn::make('is_confirmed')
                     ->color(fn (string $state): string => match ($state) {
                         '0' => 'danger',
                         '1' => 'success',
                     })
+                    ->label('Confirmado')
                     ->boolean()
                     ->trueIcon('heroicon-o-check-badge')
                     ->falseIcon('heroicon-o-x-mark'),
-                TextColumn::make('guestPhone'),
             ])
             ->filters([
                 Filter::make('is_confirmed')
