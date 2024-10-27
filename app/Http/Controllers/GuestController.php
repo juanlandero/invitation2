@@ -46,7 +46,10 @@ class GuestController extends Controller
         }
 
         if ((bool)$phone->guest->is_confirmed === true) {
-            return response()->json(['message' => '🧐 Ya has confirmado la asistencía anteriormente. 🌸']);
+            return response()->json([
+                'message' => '🧐 Ya has confirmado la asistencía anteriormente. 🌸',
+                'assitants' => $phone->guest->guest_quantity,
+            ]);
         }
 
         try {
